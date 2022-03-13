@@ -4,9 +4,11 @@
         Marka
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li *ngFor="let brand of brands">
-            <a class="dropdown-item" href="#">{{brand.brandName}}</a>
+        <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}"
+            [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands">
+            {{brand.brandName}}
         </li>
-
     </ul>
 </div>
+
+<h5 *ngIf="currentBrand">{{currentBrand.brandName}}</h5>

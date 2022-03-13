@@ -3,8 +3,19 @@
 </div>
 
 <table *ngIf="dataLoaded!=false" class="table">
+    <thead>
+        <tr>
+            <th>Araç İsmi</th>
+            <th>Marka Id</th>
+            <th>Resim Id</th>
+            <th>Model Yılı</th>
+            <th>Açıklama</th>
+            <th>Günlük Fiyat</th>
+        </tr>
+    </thead>
     <tbody>
-        <tr *ngFor="let car of cars">
+        <tr (click)="setCurrentCar(car)" [class]="getCurrentCarClass(car)" routerLink="/cars/getcardetail/{{car.id}}"
+            *ngFor="let car of cars">
             <th>{{car.carName}}</th>
             <th>{{car.brandId}}</th>
             <th>{{car.colorId}}</th>

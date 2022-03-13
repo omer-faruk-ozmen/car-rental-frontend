@@ -9,6 +9,7 @@ import { Color } from 'src/app/models/color';
 })
 export class ColorComponent implements OnInit {
   colors: Color[] = [];
+  currentColor: Color;
 
   constructor(private colorService: ColorService) {}
 
@@ -19,5 +20,22 @@ export class ColorComponent implements OnInit {
     this.colorService.getColors().subscribe((response) => {
       this.colors = response.data;
     });
+  }
+  setCurrentColor(color: Color) {
+    this.currentColor = color;
+  }
+  getCurrentColorClass(color: Color) {
+    if (color == this.currentColor) {
+      return 'dropdown-item active';
+    } else {
+      return 'dropdown-item';
+    }
+  }
+  getAllColorClass() {
+    if (!this.currentColor) {
+      return 'dropdown-item active';
+    } else {
+      return 'dropdown-item';
+    }
   }
 }
