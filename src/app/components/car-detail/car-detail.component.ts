@@ -1,7 +1,8 @@
+import { Car } from 'src/app/models/car';
 import { CarDetailService } from './../../services/car-detail.service';
 import { CarService } from './../../services/car.service';
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import { CarDetailDto } from 'src/app/models/DTOs/carDetailDto';
 
 @Component({
@@ -10,26 +11,27 @@ import { CarDetailDto } from 'src/app/models/DTOs/carDetailDto';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  carDetail: CarDetailDto[] = [];
+  @Input() car: Car;
+
+  carDetailDto: CarDetailDto[] = [];
+  currentCarDetail: CarDetailDto;
   dataLoaded = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private carDetailService: CarDetailService
+    private router: Router,
+    private carService: CarService
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((param) => {
-      if (param['carId']) {
-        this.getCarDetailById(param['carId']);
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['carId']) {
         this.dataLoaded = true;
       }
     });
   }
-  getCarDetailById(id: number) {
-    this.carDetailService.getCarDetailById(id).subscribe((response) => {
-      this.carDetail = response.data;
-      this.dataLoaded = true;
-    });
+
+  setCurrentCarDetail(carDetailDto: CarDetailDto) {
+    this.currentCarDetail = carDetailDto;
   }
 }

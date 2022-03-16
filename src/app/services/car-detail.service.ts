@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class CarDetailService {
-  apiUrl = 'https://localhost:44395/api/getcardetail/';
+  apiUrl = 'https://localhost:44395/api/cars/getcardetail/';
   constructor(private httpClient: HttpClient) {}
 
   getCarDetailById(id: number): Observable<ListResponseModel<CarDetailDto>> {

@@ -4,11 +4,13 @@
         Marka
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="mb-3">
+            <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="marka ara">
+        </div>
+
         <li (click)="setCurrentBrand(brand)" routerLink="/cars/brand/{{brand.brandId}}"
-            [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands">
+            [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands | filterPipeBrand:filterText">
             {{brand.brandName}}
         </li>
     </ul>
 </div>
-
-<h5 *ngIf="currentBrand">{{currentBrand.brandName}}</h5>

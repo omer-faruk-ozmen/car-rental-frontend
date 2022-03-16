@@ -4,10 +4,12 @@
         Renk
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <div class="mb-3">
+            <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="marka ara">
+        </div>
         <li [class]="getAllColorClass()" routerLink="/cars">Tüm Renkler</li>
-
         <li (click)="setCurrentColor(color)" routerLink="/cars/color/{{color.colorId}}"
-            [class]="getCurrentColorClass(color)" *ngFor="let color of colors">
+            [class]="getCurrentColorClass(color)" *ngFor="let color of colors  | filterPipeColor:filterText">
             {{color.colorName}}
         </li>
 

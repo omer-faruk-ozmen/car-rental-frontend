@@ -1,8 +1,9 @@
+import { BrandService } from './../../services/brand.service';
 import { Brand } from './../../models/brand';
 import { CarService } from './../../services/car.service';
 import { Component, OnInit } from '@angular/core';
 import { Car } from 'src/app/models/car';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-car',
@@ -11,12 +12,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CarComponent implements OnInit {
   cars: Car[] = [];
+  brands: Brand[];
   currentCar: Car;
   dataLoaded = false;
+  filterText = '';
 
   constructor(
     private carService: CarService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private brandService: BrandService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +37,7 @@ export class CarComponent implements OnInit {
   }
   setCurrentCar(car: Car) {
     this.currentCar = car;
+    this.router.navigateByUrl('/cars/getcardetail/' + car.id);
   }
   getCurrentCarClass(car: Car) {
     if (car == this.currentCar) {
