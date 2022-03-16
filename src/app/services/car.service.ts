@@ -1,3 +1,4 @@
+import { ResponseModel } from './../models/responseModel';
 import { environment } from './../../environments/environment';
 import { CarDetailDto } from './../models/DTOs/carDetailDto';
 import { Observable } from 'rxjs';
@@ -36,5 +37,9 @@ export class CarService {
   GetCarById(): Observable<ListResponseModel<CarDetailDto>> {
     let newPath = this.apiUrl + 'cars/getcardetail';
     return this.httpClient.get<ListResponseModel<CarDetailDto>>(newPath);
+  }
+
+  add(car: Car): Observable<ResponseModel> {
+    return this.httpClient.post<ResponseModel>(this.apiUrl + 'cars/add', car);
   }
 }
