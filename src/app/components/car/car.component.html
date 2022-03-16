@@ -7,31 +7,59 @@
 <div *ngIf="filterText.length>2" class="alert alert-success">
     {{filterText}} aradınız
 </div>
-<select id="brands">
-    <li *ngFor="let brand of brands">
-        {{brand.brandName}}
-    </li>
-</select>
-<table *ngIf="dataLoaded!=false" class="table">
-    <thead>
-        <tr>
-            <th>Araç İsmi</th>
-            <th>Marka Id</th>
-            <th>Resim Id</th>
-            <th>Model Yılı</th>
-            <th>Açıklama</th>
-            <th>Günlük Fiyat</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr (click)="setCurrentCar(car)" [class]="getCurrentCarClass(car)" routerLink="/cars/getcardetail/{{car.id}}"
-            *ngFor="let car of cars |filterPipe : filterText">
-            <th>{{car.carName | uppercase}}</th>
-            <th>{{car.brandId}}</th>
-            <th>{{car.colorId}}</th>
-            <th>{{car.modelYear}}</th>
-            <th>{{car.description}}</th>
-            <th>{{car.dailyPrice | currency:'TRY' :'₺'}}</th>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-2">
+        <select class="form-select" aria-label="marka seç">
+            <option value="0">Marka</option>
+            <option [value]="brand.brandId" *ngFor="let brand of brands">
+                {{brand.brandName}}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <select class="form-select" id="colors">
+            <option value="0">Renk</option>
+            <option *ngFor="let color of colors">
+                {{color.colorName}}
+            </option>
+        </select>
+    </div>
+    <div class="col-md-1">
+        <button class="btn btn-outline-success">Filtrele</button>
+    </div>
+</div>
+<br>
+<div class="row row-cols-1 row-cols-md-3 g-4" *ngIf="dataLoaded!=false">
+    <div (click)="setCurrentCar(car)" [class]="getCurrentCarClass(car)" routerLink="/cars/getcardetail/{{car.id}}"
+        *ngFor="let car of cars |filterPipe : filterText">
+        <div class="col">
+            <div class="card">
+                <div class="text-left">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Marka: {{car.brandId}}</li>
+                        <li class="list-group-item">Model : {{car.modelYear}}</li>
+                        <li class="list-group-item">Renk : {{car.colorId}}</li>
+                    </ul>
+                    <img src="../../../assets/images/default.jpg" alt="{{car.colorId}}" class="card-img-top">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{car.carName | uppercase}}</h5>
+                    <p class="card-text">{{car.description}}</p>
+                    <div class="row">
+
+                        <div class="text-left col-md-6">Günlük Fiyat
+                            <div>
+                                {{car.dailyPrice | currency:'TRY':'₺'}}
+                            </div>
+                        </div>
+                        <div class="text-end col-md-6">
+                            <button class="btn btn-success rounded-pill">Hemen Kirala</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
