@@ -1,10 +1,12 @@
 <br>
+
 <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
         aria-expanded="false">
         Marka
     </button>
-    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <ul class="dropdown-menu">
+
         <div class="mb-3">
             <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="marka ara">
         </div>
@@ -13,6 +15,8 @@
             [class]="getCurrentBrandClass(brand)" *ngFor="let brand of brands | filterPipeBrand:filterText">
             {{brand.brandName}}
         </li>
+
     </ul>
+
 </div>
 <br>

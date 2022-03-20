@@ -1,4 +1,4 @@
-import { CarService } from './../../services/car.service';
+import { BrandService } from './../../services/brand.service';
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -9,41 +9,37 @@ import {
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-car-add',
-  templateUrl: './car-add.component.html',
-  styleUrls: ['./car-add.component.css'],
+  selector: 'app-brand-add',
+  templateUrl: './brand-add.component.html',
+  styleUrls: ['./brand-add.component.css'],
 })
-export class CarAddComponent implements OnInit {
-  carAddForm: FormGroup;
-  fileToUpload: File | null;
+export class BrandAddComponent implements OnInit {
+  brandAddForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private carService: CarService,
+    private brandService: BrandService,
     private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
-    this.createCarAddForm();
+    this.createBrandAddForm();
   }
-
-  createCarAddForm() {
-    this.carAddForm = this.formBuilder.group({
-      carName: ['', Validators.required],
-      brandId: ['', Validators.required],
-      colorId: ['', Validators.required],
-      modelYear: ['', Validators.required],
-      dailyPrice: ['', Validators.required],
-      description: ['', Validators.required],
+  createBrandAddForm() {
+    this.brandAddForm = this.formBuilder.group({
+      brandName: ['', Validators.required],
     });
   }
 
   add() {
-    if (this.carAddForm.valid) {
-      let carModel = Object.assign({}, this.carAddForm.value);
-      this.carService.add(carModel).subscribe(
+    if (this.brandAddForm.valid) {
+      let brandModel = Object.assign({}, this.brandAddForm.value);
+      this.brandService.add(brandModel).subscribe(
         (response) => {
           this.toastrService.success(response.message, 'Başarılı');
+          setTimeout(function () {
+            window.location.reload();
+          }, 500);
         },
         (responseError) => {
           if (responseError.error.Errors.length > 0) {

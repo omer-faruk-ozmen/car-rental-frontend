@@ -17,6 +17,9 @@ import { FilterPipeColorPipe } from './pipes/filter-pipe-color.pipe';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ColorAddComponent } from './components/color-add/color-add.component';
+import { BrandAddComponent } from './components/brand-add/brand-add.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FilterPipeBrandPipe,
     FilterPipeColorPipe,
     CarAddComponent,
+    ColorAddComponent,
+    BrandAddComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
