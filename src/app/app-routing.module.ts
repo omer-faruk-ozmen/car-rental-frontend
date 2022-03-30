@@ -1,3 +1,4 @@
+import { RegisterComponent } from './components/register/register.component';
 import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './components/login/login.component';
 import { BrandAddComponent } from './components/brand-add/brand-add.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   },
   { path: 'brands/add', component: BrandAddComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({

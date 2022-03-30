@@ -1,8 +1,11 @@
-<div>
-    <ul>
-        <li routerLink="/cars/getcardetail/{{car.id}}" *ngFor="let car of carDetailDto">
-            <p>{{car.carName}}</p>
-            <p>{{car.brandName}}</p>
-        </li>
-    </ul>
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-md-12">
+            <div *ngFor="let carDetail of carDetailDto">
+                {{carDetail.carName}}
+                {{carDetail.brandName}}
+            </div>
+        </div>
+
+    </div>
 </div>

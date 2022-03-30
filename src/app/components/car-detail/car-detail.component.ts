@@ -11,9 +11,8 @@ import { CarDetailDto } from 'src/app/models/DTOs/carDetailDto';
   styleUrls: ['./car-detail.component.css'],
 })
 export class CarDetailComponent implements OnInit {
-  @Input() car: Car;
-
   carDetailDto: CarDetailDto[] = [];
+  apiUrl = 'https://localhost:44370/uploads/images/';
   currentCarDetail: CarDetailDto;
   dataLoaded = false;
 
@@ -33,5 +32,19 @@ export class CarDetailComponent implements OnInit {
 
   setCurrentCarDetail(carDetailDto: CarDetailDto) {
     this.currentCarDetail = carDetailDto;
+  }
+
+  getCarDetails() {
+    this.carService.GetCarDetail().subscribe((response) => {
+      this.carDetailDto = response.data;
+      console.log(this.carDetailDto);
+    });
+  }
+
+  getCarDetailsById(id: number) {
+    this.carService.GetCarById(id).subscribe((response) => {
+      this.carDetailDto = response.data;
+      console.log(this.carDetailDto);
+    });
   }
 }
